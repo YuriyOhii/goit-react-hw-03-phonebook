@@ -15,6 +15,21 @@ export class App extends Component {
     filter: '',
   };
 
+  componentDidMount() {
+    const savedContacts = localStorage.getItem('contacts');
+    if (savedContacts !== null) {
+      const contacts = JSON.parse(savedContacts);
+      this.setState({ contacts });
+    }
+  }
+
+  componentDidUpdate(_, pS) {
+    const { contacts } = this.state;
+    if (pS.contacts !== contacts) {
+      localStorage.setItem('contacts', JSON.stringify(contacts));
+    }
+  }
+
   checkContactName = values => {
     const normalizedName = values.name
       .split(' ')
@@ -38,10 +53,12 @@ export class App extends Component {
     this.setState({ filter: target.value });
   };
 
-  deleteContact = ({target}) => {
-    const updatedContacts = this.state.contacts.filter(({id})=> id !== target.value);
-    this.setState({contacts: updatedContacts});
-  }
+  deleteContact = ({ target }) => {
+    const updatedContacts = this.state.contacts.filter(
+      ({ id }) => id !== target.value
+    );
+    this.setState({ contacts: updatedContacts });
+  };
 
   getFilteredContacts = () => {
     const normalizedValue = this.state.filter.toLowerCase();
@@ -59,7 +76,10 @@ export class App extends Component {
 
         <h2>Contacts</h2>
         <Filter value={filter} handleChange={this.handleChange} />
-        <ContactList contacts={this.getFilteredContacts()} onChange={this.deleteContact} />
+        <ContactList
+          contacts={this.getFilteredContacts()}
+          onChange={this.deleteContact}
+        />
       </>
     );
   }
