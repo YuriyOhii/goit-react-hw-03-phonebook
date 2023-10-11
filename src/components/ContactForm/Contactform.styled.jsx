@@ -4,10 +4,10 @@ import { Form, ErrorMessage, Field } from 'formik';
 export const NewContact = styled(Form)`
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: ${({ theme }) => theme.spacing(1)};
 
   width: 320px;
-  padding: 12px;
+  padding: ${({ theme }) => theme.spacing(3)};
 
   border: 1px solid #212121;
   border-radius: 4px;
@@ -17,19 +17,19 @@ export const Input = styled(Field)`
   font-size: 16px;
   font-weight: 500;
 
-  color: #212121;
+  color: ${({ theme }) => theme.colors.grey};
 `;
 
 export const ErrCaption = styled(ErrorMessage)`
   font-size: 12px;
   font-weight: 400;
 
-  color: red;
+  color: ${({ theme }) => theme.colors.red};
 `;
 
 export const Button = styled.button`
-  margin: 12px auto 0 auto;
-  padding: 4px 8px;
+  margin: ${({ theme }) => theme.spacing(4)} auto 0 auto;
+  padding: ${({ theme }) => theme.spacing(1)} ${({ theme }) => theme.spacing(2)};
 
   border-radius: 4px;
 
@@ -38,8 +38,8 @@ export const Button = styled.button`
   line-height: 1.5;
   letter-spacing: 0.02em;
 
-  background-color: #212121;
-  color: #ffffff;
+  background-color: ${({ theme }) => theme.colors.grey};
+  color: ${({ theme }) => theme.colors.white};
 
   opacity: 1;
   transition: opacity 250ms linear;
