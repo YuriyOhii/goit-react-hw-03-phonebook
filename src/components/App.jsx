@@ -31,12 +31,9 @@ export class App extends Component {
   }
 
   checkContactName = values => {
-    const normalizedName = values.name
-      .split(' ')
-      .filter(el => el)
-      .join(' ');
+   
     const isNameInPhonebook = this.state.contacts.find(
-      ({ name }) => name === normalizedName
+      ({ name }) => name === values.name
     );
     return isNameInPhonebook;
   };
